@@ -6,7 +6,7 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/include
 
-CXX_FLAGSarm64 =  -Wall -Wextra -Wpedantic -std=c++17 -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3
+CXX_FLAGSarm64 =  -Wpedantic -std=c++17 -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3
 
-CXX_FLAGS =  -Wall -Wextra -Wpedantic -std=c++17 -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3
+CXX_FLAGS =  -Wpedantic -std=c++17 -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX15.4.sdk -mmacosx-version-min=15.3
 
