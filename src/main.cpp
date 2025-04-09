@@ -11,10 +11,15 @@ int main(){
     std::unordered_map<int, std::vector<int>> prefix = create_prefix(p.second);
     // printMapOfVectors(prefix);
 
-    std::vector<std::vector<int>> winning_moves = define_winning_positions(N, M);
-    // print2DVector(winning_moves);
+    std::vector<std::vector<int>> winning_positions = define_winning_positions(N, M);
+    // print2DVector(winning_positions);
 
-    std::vector<std::vector<int>> clauses = create_clauses(N, M);
+    std::vector<std::vector<int>> x_turns = generate_x_turns(N*M);
+    // print2DVector(x_turns);
+
+    std::vector<std::vector<int>> clauses = create_clauses(N, M, p.first, winning_positions, x_turns);
+    // print2DVector(clauses);
+
 
     return 0;
 }

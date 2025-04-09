@@ -8,7 +8,7 @@ std::pair<std::unordered_map<std::pair<int, int>, int, pair_hash>,
     std::unordered_map<std::pair<int, int>, int, pair_hash> variables;
     std::unordered_map<int, std::pair<int, int>> variables_;
     
-    int position_on_board, var_index = 0;
+    int var_index = 1;
     std::vector<int> var;
     // std::cout << "N: " << N << " M: " << M << "\n";
 
@@ -71,25 +71,92 @@ std::vector<std::vector<int>> define_winning_positions (int N, int M)
 }
 
 
-std::vector<std::vector<int>> create_clauses (int N, int M)
+
+// Helper to check time spacing
+bool is_spaced(const std::vector<int>& combo) {
+    return (combo[1] - combo[0] >= 2) && (combo[2] - combo[1] >= 2);
+}
+
+// Main function: generates and returns all spaced 3-combinations
+std::vector<std::vector<int>> generate_x_turns(int maxTurn) {
+    std::vector<int> times;
+    for (int i = 0; i < maxTurn; i+=2) times.push_back(i);
+
+    std::vector<bool> bitmask(3, true);
+    bitmask.resize(times.size(), false);
+
+    std::vector<std::vector<int>> result;
+
+    do {
+        std::vector<int> combo;
+        for (size_t i = 0; i < times.size(); ++i)
+            if (bitmask[i]) combo.push_back(times[i]);
+
+        if (is_spaced(combo)) {
+            result.push_back(combo);
+        }
+
+    } while (std::prev_permutation(bitmask.begin(), bitmask.end()));
+
+    return result;
+}
+
+std::vector<std::vector<int>> create_clauses (int N, int M, std::unordered_map<std::pair<int, int>, int, pair_hash>& variables, std::vector<std::vector<int>> winning_positions, std::vector<std::vector<int>> x_turns)
 {
     std::vector<std::vector<int>> clauses;
+    std::vector<int> clause;
 
-    /* each cell is marked at most once (by any player) */
+    /* each position is marked at most once (by any player) */
     for (int p = 0; p < N*M; p++)
     {   
-        std::cout << "p: " << p << "\n";
+        // std::cout << "p: " << p << "\n";
         for (int t = 0; t < N * M; t++)
         {
-            std::cout << "t: " << t << "\n";
-
+            clause.push_back(-(variables[{t, p}]));
             for (int t_ = t + 1; t_ < N * M; t_++)
             {
-                std::cout << "t_: " << t_ << "\n";
+                int var_ = variables[{t_, p}];
+                // printf("clause: -(%d %d) v -(%d %d)\n", t, p, t_, p);
+                // printf("clause: -%d v -%d\n", variables[{t, p}], variables[{t_, p}]);
+                clause.push_back(-(variables[{t_, p}]));
+                clauses.push_back(clause);
+                clause.pop_back();
             }
-            std::cout << "\n";
+            // std::cout << "\n";
+            clause = {};
+        }
+        clause = {};
+    }
+
+    clause = {};
+
+    /* write winning stratefies to "winning_moves.txt" */
+    /* use Tseitin transform to convert winning strategies to CNF */
+    /* set K as starting key for w variables */
+
+    int K = N*M;
+
+    for (int p = 0; p < N*M; p++)
+    {
+        std::cout << "position: " << p << "\n";
+        for (std::vector<int> c : x_turns)
+        {
+            for (int t : c)
+            {
+                std::cout << t << " " << p << "\n" ;/* */
+            }
+
+            // for (int t : c)
+            // {
+            //     std::cout << variables[{t, p}] << " " ;
+            // }
+            // std::cout << "\n";
         }
     }
+
+
+
+
 
     return clauses;
 }
