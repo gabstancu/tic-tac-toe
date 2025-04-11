@@ -79,7 +79,8 @@ bool is_spaced(const std::vector<int>& combo) {
 
 
 // Main function: generates and returns all spaced 3-combinations
-std::vector<std::vector<int>> generate_x_turns(int maxTurn) {
+std::vector<std::vector<int>> generate_x_turns(int maxTurn) 
+{
     std::vector<int> times;
     for (int i = 0; i < maxTurn; i+=2) times.push_back(i);
 
@@ -88,19 +89,21 @@ std::vector<std::vector<int>> generate_x_turns(int maxTurn) {
 
     std::vector<std::vector<int>> result;
 
-    do {
+    do 
+    {
         std::vector<int> combo;
         for (size_t i = 0; i < times.size(); ++i)
             if (bitmask[i]) combo.push_back(times[i]);
 
-        if (is_spaced(combo)) {
+        if (is_spaced(combo))
             result.push_back(combo);
-        }
 
-    } while (std::prev_permutation(bitmask.begin(), bitmask.end()));
+    } 
+    while (std::prev_permutation(bitmask.begin(), bitmask.end()));
 
     return result;
 }
+
 
 
 std::vector<std::vector<int>> create_clauses (int N, int M, std::unordered_map<std::pair<int, int>, int, pair_hash>& variables, 
