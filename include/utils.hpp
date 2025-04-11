@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <set>
+#include <cmath>
 
 struct pair_hash {
     std::size_t operator()(const std::pair<int, int>& p) const {
@@ -45,6 +46,16 @@ void printMapFlexible(const std::unordered_map<K, V, Hash>& map,
                           "Unsupported map type for printMapFlexible.");
         }
     }
+}
+
+
+template<typename T>
+void printVector(const std::vector<T>& vec, const std::string& label = "Vector") {
+    std::cout << label << ": ";
+    for (const T& val : vec) {
+        std::cout << val << " ";
+    }
+    std::cout << '\n';
 }
 
 

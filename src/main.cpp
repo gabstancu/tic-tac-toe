@@ -17,7 +17,7 @@ int main(){
     std::vector<std::vector<int>> x_turns = generate_x_turns(N*M);
     // print2DVector(x_turns);
 
-    std::vector<std::vector<int>> clauses = create_clauses(N, M, p.first, winning_positions, x_turns);
+    std::vector<std::vector<int>> clauses = create_clauses(N, M, p.first, p.second, winning_positions, x_turns);
     // print2DVector(clauses);
 
 

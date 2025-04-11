@@ -77,6 +77,7 @@ bool is_spaced(const std::vector<int>& combo) {
     return (combo[1] - combo[0] >= 2) && (combo[2] - combo[1] >= 2);
 }
 
+
 // Main function: generates and returns all spaced 3-combinations
 std::vector<std::vector<int>> generate_x_turns(int maxTurn) {
     std::vector<int> times;
@@ -101,7 +102,11 @@ std::vector<std::vector<int>> generate_x_turns(int maxTurn) {
     return result;
 }
 
-std::vector<std::vector<int>> create_clauses (int N, int M, std::unordered_map<std::pair<int, int>, int, pair_hash>& variables, std::vector<std::vector<int>> winning_positions, std::vector<std::vector<int>> x_turns)
+
+std::vector<std::vector<int>> create_clauses (int N, int M, std::unordered_map<std::pair<int, int>, int, pair_hash>& variables, 
+                                              std::unordered_map<int, std::pair<int, int>>& variables_, 
+                                              std::vector<std::vector<int>> winning_positions, 
+                                              std::vector<std::vector<int>> x_turns)
 {
     std::vector<std::vector<int>> clauses;
     std::vector<int> clause;
@@ -116,8 +121,8 @@ std::vector<std::vector<int>> create_clauses (int N, int M, std::unordered_map<s
             for (int t_ = t + 1; t_ < N * M; t_++)
             {
                 int var_ = variables[{t_, p}];
-                // printf("clause: -(%d %d) v -(%d %d)\n", t, p, t_, p);
-                // printf("clause: -%d v -%d\n", variables[{t, p}], variables[{t_, p}]);
+                printf("clause: -(%d %d) v -(%d %d)\n", t, p, t_, p);
+                printf("clause: -%d v -%d\n", variables[{t, p}], variables[{t_, p}]);
                 clause.push_back(-(variables[{t_, p}]));
                 clauses.push_back(clause);
                 clause.pop_back();
@@ -130,33 +135,41 @@ std::vector<std::vector<int>> create_clauses (int N, int M, std::unordered_map<s
 
     clause = {};
 
-    /* write winning stratefies to "winning_moves.txt" */
+    /* exactly one move has to be done per turn -> at least one + at most one */
+
+    // at least one move per turn
+
+
+    // at most one move per turn
+
+
+
+    /* write winning strategies to "winning_moves.txt" */
     /* use Tseitin transform to convert winning strategies to CNF */
     /* set K as starting key for w variables */
+    int K = pow(N*M, 2) + 1;
+    std::cout << "Tseitin variables starting from " << K << "\n";
+    std::vector<std::vector<int>> winning_cubes = {};
+    std::vector<int> winning_cube = {};
 
-    int K = N*M;
-
-    for (int p = 0; p < N*M; p++)
-    {
-        std::cout << "position: " << p << "\n";
-        for (std::vector<int> c : x_turns)
+    for (std::vector<int> c : x_turns)
+    {   
+        for (std::vector<int> winning_placement : winning_positions)
         {
-            for (int t : c)
+            for (size_t i = 0; i < c.size(); i++)
             {
-                std::cout << t << " " << p << "\n" ;/* */
+                // std::cout << c[i] << " " << winning_placement[i] << "\n";
+                winning_cube.push_back(variables[{c[i], winning_placement[i]}]);
             }
-
-            // for (int t : c)
-            // {
-            //     std::cout << variables[{t, p}] << " " ;
-            // }
+            // printVector(winning_cube);
+            winning_cubes.push_back(winning_cube);
+            winning_cube = {};
             // std::cout << "\n";
         }
+        // std::cout << "\n";
     }
 
-
-
-
+    // print2DVector(winning_cubes);
 
     return clauses;
 }
