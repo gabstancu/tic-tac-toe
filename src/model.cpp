@@ -106,7 +106,8 @@ std::vector<std::vector<int>> generate_x_turns(int maxTurn)
 
 
 
-std::vector<std::vector<int>> create_clauses (int N, int M, std::unordered_map<std::pair<int, int>, int, pair_hash>& variables, 
+std::vector<std::vector<int>> create_clauses (int N, int M, 
+                                              std::unordered_map<std::pair<int, int>, int, pair_hash>& variables, 
                                               std::unordered_map<int, std::pair<int, int>>& variables_, 
                                               std::vector<std::vector<int>> winning_positions, 
                                               std::vector<std::vector<int>> x_turns)
@@ -124,8 +125,8 @@ std::vector<std::vector<int>> create_clauses (int N, int M, std::unordered_map<s
             for (int t_ = t + 1; t_ < N * M; t_++)
             {
                 int var_ = variables[{t_, p}];
-                printf("clause: -(%d %d) v -(%d %d)\n", t, p, t_, p);
-                printf("clause: -%d v -%d\n", variables[{t, p}], variables[{t_, p}]);
+                // printf("clause: -(%d %d) v -(%d %d)\n", t, p, t_, p);
+                // printf("clause: -%d v -%d\n", variables[{t, p}], variables[{t_, p}]);
                 clause.push_back(-(variables[{t_, p}]));
                 clauses.push_back(clause);
                 clause.pop_back();
@@ -138,20 +139,54 @@ std::vector<std::vector<int>> create_clauses (int N, int M, std::unordered_map<s
 
     clause = {};
 
-    /* exactly one move has to be done per turn -> at least one + at most one */
-
+    /* exactly one move has to be done per turn -> at least one move + at most one move */
     // at least one move per turn
+    for (int t = 0; t < N*M; t++)
+    {
+        // std::cout << "turn " << t << "\n";
+        for (int p = 0; p < N*M; p++)
+        {
+            // std::cout << t << " " << p << "\n";
+            // std::cout << "variable index: " << variables[{t, p}] << "\n";
+            clause.push_back(variables[{t, p}]);
+        }
+        // std::cout << "\n";
+        clauses.push_back(clause);
+        clause = {};
+    }
 
-
+    clause = {};
+    
+    // int ALARM = 0;
     // at most one move per turn
+    // std::cout << "At most one move per turn..." << "\n";
+    for (int t = 0; t < N*M; t++)
+    {
+        // std::cout << "turn " << t << "\n";
+        for (int i = 0; i < N*M; i++)
+        {
+            for (int j = 0; j < N*M; j++)
+            {
+                if (i<j)
+                {
+                    // printf("clause: -(%d %d) v -(%d %d)\n", t, i, t, j);
+                    // printf("clause: -%d v -%d\n", variables[{t, i}], variables[{t, j}]);
+                    // ALARM++;
+                    clause.push_back(-(variables[{t, i}]));
+                    clause.push_back(-(variables[{t, j}]));
+                    clauses.push_back(clause);
+                    clause = {};
+                }
+            }
+        }
+        // std::cout << "ALARM: " << ALARM << "\n";
+        // ALARM = 0;
+    }
 
 
 
     /* write winning strategies to "winning_moves.txt" */
-    /* use Tseitin transform to convert winning strategies to CNF */
-    /* set K as starting key for w variables */
-    int K = pow(N*M, 2) + 1;
-    std::cout << "Tseitin variables starting from " << K << "\n";
+    // std::cout << "Tseitin variables starting from " << K << "\n";
     std::vector<std::vector<int>> winning_cubes = {};
     std::vector<int> winning_cube = {};
 
@@ -173,6 +208,18 @@ std::vector<std::vector<int>> create_clauses (int N, int M, std::unordered_map<s
     }
 
     // print2DVector(winning_cubes);
+
+    /* use Tseitin variables to convert winning strategies to CNF */
+    /* set K as starting key for Tseitin variables (w) */
+    int K = pow(N*M, 2) + 1;
+    for (std::vector<int> winning_cube : winning_cubes)
+    {
+        for (int var : winning_cube)
+        {
+            std::cout << var << " ";
+        }
+        std::cout << "\n";
+    }
 
     return clauses;
 }

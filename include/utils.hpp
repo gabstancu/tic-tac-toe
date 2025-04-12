@@ -4,7 +4,8 @@
 #include <cmath>
 
 struct pair_hash {
-    std::size_t operator()(const std::pair<int, int>& p) const {
+    std::size_t operator()(const std::pair<int, int>& p) const 
+    {
         return std::hash<int>()(p.first) ^ (std::hash<int>()(p.second) << 1);
     }
 };
@@ -71,6 +72,7 @@ void print2DVector(const std::vector<std::vector<T>>& matrix) {
     }
 }
 
+
 template<typename T>
 void printMapOfVectors(const std::unordered_map<int, std::vector<T>>& map) {
     for (const auto& [key, vec] : map) {
@@ -81,6 +83,3 @@ void printMapOfVectors(const std::unordered_map<int, std::vector<T>>& map) {
         std::cout << '\n';
     }
 }
-
-
-void print_constraints ();
