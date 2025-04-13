@@ -2,8 +2,10 @@
 #include <iostream>
 #include <set>
 #include <cmath>
+#include <map>
 
-struct pair_hash {
+struct pair_hash 
+{
     std::size_t operator()(const std::pair<int, int>& p) const 
     {
         return std::hash<int>()(p.first) ^ (std::hash<int>()(p.second) << 1);
@@ -13,36 +15,50 @@ struct pair_hash {
 template<typename K, typename V, typename Hash = std::hash<K>>
 void printMapFlexible(const std::unordered_map<K, V, Hash>& map,
                       const std::string& player_flag = "") {
-    for (const auto& [key, val] : map) {
+    for (const auto& [key, val] : map) 
+    {
         bool print = true;
 
-        if constexpr (std::is_same<V, std::pair<int, int>>::value) {
+        if constexpr (std::is_same<V, std::pair<int, int>>::value) 
+        {
             // Value is pair<int, int> → turn = val.first
-            if (player_flag == "e") {
+            if (player_flag == "e") 
+            {
                 print = (val.first % 2 == 0);
-            } else if (player_flag == "a") {
+            } 
+            else if (player_flag == "a") 
+            {
                 print = (val.first % 2 != 0);
             }
 
-            if (print) {
+            if (print) 
+            {
                 std::cout << "Key: " << key
                           << " -> Value: (" << val.first << ", " << val.second << ")\n";
             }
 
-        } else if constexpr (std::is_same<K, std::pair<int, int>>::value && std::is_same<V, int>::value) {
+        } 
+        else if constexpr (std::is_same<K, std::pair<int, int>>::value && std::is_same<V, int>::value) 
+        {
             // Key is pair<int, int> → turn = key.first
-            if (player_flag == "e") {
+            if (player_flag == "e") 
+            {
                 print = (key.first % 2 == 0);
-            } else if (player_flag == "a") {
+            } 
+            else if (player_flag == "a") 
+            {
                 print = (key.first % 2 != 0);
             }
 
-            if (print) {
+            if (print) 
+            {
                 std::cout << "Key: (" << key.first << ", " << key.second
                           << ") -> Value: " << val << "\n";
             }
 
-        } else {
+        } 
+        else 
+        {
             static_assert(std::is_same<V, void>::value,
                           "Unsupported map type for printMapFlexible.");
         }
@@ -53,7 +69,8 @@ void printMapFlexible(const std::unordered_map<K, V, Hash>& map,
 template<typename T>
 void printVector(const std::vector<T>& vec, const std::string& label = "Vector") {
     std::cout << label << ": ";
-    for (const T& val : vec) {
+    for (const T& val : vec) 
+    {
         std::cout << val << " ";
     }
     std::cout << '\n';
@@ -74,10 +91,12 @@ void print2DVector(const std::vector<std::vector<T>>& matrix) {
 
 
 template<typename T>
-void printMapOfVectors(const std::unordered_map<int, std::vector<T>>& map) {
-    for (const auto& [key, vec] : map) {
+void printMapOfVectors(const std::map<int, std::vector<T>>& map) {
+    for (const auto& [key, vec] : map) 
+    {
         std::cout << "Key: " << key << " -> Values: ";
-        for (const T& val : vec) {
+        for (const T& val : vec) 
+        {
             std::cout << val << " ";
         }
         std::cout << '\n';

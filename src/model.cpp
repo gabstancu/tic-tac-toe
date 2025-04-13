@@ -28,9 +28,9 @@ std::pair<std::unordered_map<std::pair<int, int>, int, pair_hash>,
 }
 
 
-std::unordered_map<int, std::vector<int>> create_prefix (std::unordered_map<int, std::pair<int, int>> variables_)
+std::map<int, std::vector<int>> create_prefix (std::unordered_map<int, std::pair<int, int>> variables_)
 {
-    std::unordered_map<int, std::vector<int>> prefix;
+    std::map<int, std::vector<int>> prefix;
 
     for (const auto& [var_key, t_p] : variables_)
     {   
@@ -107,6 +107,7 @@ std::vector<std::vector<int>> generate_x_turns(int maxTurn)
 
 
 std::vector<std::vector<int>> create_clauses (int N, int M, 
+                                              std::map<int, std::vector<int>>& prefix,
                                               std::unordered_map<std::pair<int, int>, int, pair_hash>& variables, 
                                               std::unordered_map<int, std::pair<int, int>>& variables_, 
                                               std::vector<std::vector<int>> winning_positions, 
@@ -129,6 +130,7 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
                 // printf("clause: -%d v -%d\n", variables[{t, p}], variables[{t_, p}]);
                 clause.push_back(-(variables[{t_, p}]));
                 clauses.push_back(clause);
+                // printVector(clause);
                 clause.pop_back();
             }
             // std::cout << "\n";
@@ -140,6 +142,7 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
     clause = {};
 
     /* exactly one move has to be done per turn -> at least one move + at most one move */
+    
     // at least one move per turn
     for (int t = 0; t < N*M; t++)
     {
@@ -151,6 +154,7 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
             clause.push_back(variables[{t, p}]);
         }
         // std::cout << "\n";
+        // printVector(clause);
         clauses.push_back(clause);
         clause = {};
     }
@@ -175,6 +179,7 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
                     clause.push_back(-(variables[{t, i}]));
                     clause.push_back(-(variables[{t, j}]));
                     clauses.push_back(clause);
+                    // printVector(clause);
                     clause = {};
                 }
             }
@@ -186,7 +191,7 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
 
 
     /* write winning strategies to "winning_moves.txt" */
-    // std::cout << "Tseitin variables starting from " << K << "\n";
+    
     std::vector<std::vector<int>> winning_cubes = {};
     std::vector<int> winning_cube = {};
 
@@ -209,17 +214,55 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
 
     // print2DVector(winning_cubes);
 
-    /* use Tseitin variables to convert winning strategies to CNF */
+    clause = {};
+
     /* set K as starting key for Tseitin variables (w) */
-    int K = pow(N*M, 2) + 1;
+    int w_id = pow(N*M, 2) + 1;
+    int w_num = 0;
+    std::vector<int> tseitin_clause = {};
+    // std::cout << "Tseitin variables starting from " << w_id << "\n";
+
     for (std::vector<int> winning_cube : winning_cubes)
-    {
+    {   
+        variables[{w_id, w_num}] = w_id;
+        std::pair<int, int> p = std::make_pair(w_id, w_num);
+        variables_[w_id] = p;
+
+        /* -wi v x_{t, p} for every x_{t, p} in winning cube */
+        clause.push_back(-w_id);
         for (int var : winning_cube)
         {
-            std::cout << var << " ";
+            // std::cout << var << " ";
+            clause.push_back(var);
+            
         }
-        std::cout << "\n";
-    }
+        // std::cout << "\n";
+        clauses.push_back(clause);
 
+        clause = {};
+
+        /* -x_{t1, p1} v -x_{t2, p2} v -x_{t3, p3} v wi */
+        clause.push_back(w_id);
+        for (int var : winning_cube)
+        {
+            // std::cout << var << " ";
+            clause.push_back(-var);
+            
+        }
+
+        clauses.push_back(clause);
+        tseitin_clause.push_back(w_id);
+        
+        w_id++;
+        w_num++;
+
+        clause = {};
+    }
+    clauses.push_back(tseitin_clause);
+
+    /* add variables to prefix (last block) */
+    int prefix_id = N*M;
+    prefix[prefix_id] = tseitin_clause;
+    
     return clauses;
 }
