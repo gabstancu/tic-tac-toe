@@ -19,9 +19,11 @@ int main()
 
     std::vector<std::vector<int>> clauses = create_clauses(N, M, prefix, p.first, p.second, winning_positions, x_turns);
     // print2DVector(clauses);
-    printMapOfVectors(prefix);
+    // printMapOfVectors(prefix);
 
     std::cout << "Num. of clauses: " << clauses.size() << "\n";
+
+    writeQDIMACS(prefix, p.first, p.second, clauses);
 
 
     return 0;

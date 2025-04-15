@@ -1,5 +1,6 @@
 #include "model.hpp"
-
+#include <unistd.h>
+#include <fstream>
 
 std::pair<std::unordered_map<std::pair<int, int>, int, pair_hash>, 
           std::unordered_map<int, std::pair<int, int>>> create_variables (int N, int M)
@@ -201,7 +202,7 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
         {
             for (size_t i = 0; i < c.size(); i++)
             {
-                // std::cout << c[i] << " " << winning_placement[i] << "\n";
+                // std::cout << c[i] << " " << winning_placement[i] << "  ";
                 winning_cube.push_back(variables[{c[i], winning_placement[i]}]);
             }
             // printVector(winning_cube);
@@ -265,4 +266,75 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
     prefix[prefix_id] = tseitin_clause;
     
     return clauses;
+}
+
+
+void writeQDIMACS (std::map<int, std::vector<int>>& prefix,
+                   std::unordered_map<std::pair<int, int>, int, pair_hash>& variables, 
+                   std::unordered_map<int, std::pair<int, int>>& variables_, 
+                   std::vector<std::vector<int>> clauses
+)
+{
+
+    /* get cwd */
+    char cwd[PATH_MAX];
+    std::string parent;
+
+    if (getcwd(cwd, sizeof(cwd)) != nullptr) 
+    {
+        std::string path(cwd);
+        // std::cout << "Current directory: " << path << std::endl;
+
+        size_t pos = path.find_last_of('/');
+        if (pos != std::string::npos) 
+        {
+            parent = path.substr(0, pos);
+            // std::cout << "Parent directory: " << parent << std::endl;
+        }
+    } 
+    else 
+    {
+        perror("getcwd() error");
+        return;
+    }
+
+    std::cout << "writing QDIMACS in: " << parent << std::endl;
+    chdir("..");
+    std::ofstream file("problem.txt");
+
+    // write header
+    std::string num_vars = std::to_string(variables.size());
+    std::string num_clauses = std::to_string(clauses.size());
+    std::string space = " ";
+    std::string header = "p cnf" + space + num_vars + space + num_clauses + '\n';
+    file << header;
+
+    std::cout << "header " << header << '\n';
+
+    // write prefix
+    for (const auto& [block, vars] : prefix)
+    {
+        
+    }
+
+    // write clauses
+    std::string c;
+    for (std::vector<int> clause : clauses)
+    {
+        for (int literal : clause)
+        {
+            // std::cout << literal << " ";
+            c += std::to_string(literal);
+            c += space;
+        }
+        c.pop_back();
+        c += '\n';
+        std::cout << "c: " << c;
+        c = "";
+    }
+
+
+
+    file.close();
+
 }

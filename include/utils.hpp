@@ -14,7 +14,8 @@ struct pair_hash
 
 template<typename K, typename V, typename Hash = std::hash<K>>
 void printMapFlexible(const std::unordered_map<K, V, Hash>& map,
-                      const std::string& player_flag = "") {
+                      const std::string& player_flag = "") 
+{
     for (const auto& [key, val] : map) 
     {
         bool print = true;
@@ -67,7 +68,8 @@ void printMapFlexible(const std::unordered_map<K, V, Hash>& map,
 
 
 template<typename T>
-void printVector(const std::vector<T>& vec, const std::string& label = "Vector") {
+void printVector(const std::vector<T>& vec, const std::string& label = "Vector") 
+{
     std::cout << label << ": ";
     for (const T& val : vec) 
     {
@@ -78,7 +80,8 @@ void printVector(const std::vector<T>& vec, const std::string& label = "Vector")
 
 
 template<typename T>
-void print2DVector(const std::vector<std::vector<T>>& matrix) {
+void print2DVector(const std::vector<std::vector<T>>& matrix) 
+{
     for (const auto& row : matrix) 
     {
         for (const T& val : row) 
@@ -91,7 +94,8 @@ void print2DVector(const std::vector<std::vector<T>>& matrix) {
 
 
 template<typename T>
-void printMapOfVectors(const std::map<int, std::vector<T>>& map) {
+void printMapOfVectors(const std::map<int, std::vector<T>>& map) 
+{
     for (const auto& [key, vec] : map) 
     {
         std::cout << "Key: " << key << " -> Values: ";

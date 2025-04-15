@@ -76,43 +76,43 @@ CMakeFiles/test.dir/src/main.cpp.o: CMakeFiles/test.dir/flags.make
 CMakeFiles/test.dir/src/main.cpp.o: /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/main.cpp
 CMakeFiles/test.dir/src/main.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/src/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/main.cpp.o -MF CMakeFiles/test.dir/src/main.cpp.o.d -o CMakeFiles/test.dir/src/main.cpp.o -c /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/main.cpp
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/main.cpp.o -MF CMakeFiles/test.dir/src/main.cpp.o.d -o CMakeFiles/test.dir/src/main.cpp.o -c /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/main.cpp
 
 CMakeFiles/test.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test.dir/src/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/main.cpp > CMakeFiles/test.dir/src/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/main.cpp > CMakeFiles/test.dir/src/main.cpp.i
 
 CMakeFiles/test.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/main.cpp -o CMakeFiles/test.dir/src/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/main.cpp -o CMakeFiles/test.dir/src/main.cpp.s
 
 CMakeFiles/test.dir/src/model.cpp.o: CMakeFiles/test.dir/flags.make
 CMakeFiles/test.dir/src/model.cpp.o: /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/model.cpp
 CMakeFiles/test.dir/src/model.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test.dir/src/model.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/model.cpp.o -MF CMakeFiles/test.dir/src/model.cpp.o.d -o CMakeFiles/test.dir/src/model.cpp.o -c /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/model.cpp
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/model.cpp.o -MF CMakeFiles/test.dir/src/model.cpp.o.d -o CMakeFiles/test.dir/src/model.cpp.o -c /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/model.cpp
 
 CMakeFiles/test.dir/src/model.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test.dir/src/model.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/model.cpp > CMakeFiles/test.dir/src/model.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/model.cpp > CMakeFiles/test.dir/src/model.cpp.i
 
 CMakeFiles/test.dir/src/model.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/model.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/model.cpp -o CMakeFiles/test.dir/src/model.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/model.cpp -o CMakeFiles/test.dir/src/model.cpp.s
 
 CMakeFiles/test.dir/src/utils.cpp.o: CMakeFiles/test.dir/flags.make
 CMakeFiles/test.dir/src/utils.cpp.o: /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/utils.cpp
 CMakeFiles/test.dir/src/utils.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test.dir/src/utils.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/utils.cpp.o -MF CMakeFiles/test.dir/src/utils.cpp.o.d -o CMakeFiles/test.dir/src/utils.cpp.o -c /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/utils.cpp
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/utils.cpp.o -MF CMakeFiles/test.dir/src/utils.cpp.o.d -o CMakeFiles/test.dir/src/utils.cpp.o -c /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/utils.cpp
 
 CMakeFiles/test.dir/src/utils.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test.dir/src/utils.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/utils.cpp > CMakeFiles/test.dir/src/utils.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/utils.cpp > CMakeFiles/test.dir/src/utils.cpp.i
 
 CMakeFiles/test.dir/src/utils.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/utils.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/utils.cpp -o CMakeFiles/test.dir/src/utils.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/utils.cpp -o CMakeFiles/test.dir/src/utils.cpp.s
 
 # Object files for target test
 test_OBJECTS = \
