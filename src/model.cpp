@@ -269,9 +269,9 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
 }
 
 
-void writeQDIMACS (std::map<int, std::vector<int>>& prefix,
-                   std::unordered_map<std::pair<int, int>, int, pair_hash>& variables, 
-                   std::unordered_map<int, std::pair<int, int>>& variables_, 
+void writeQDIMACS (std::map<int, std::vector<int>> prefix,
+                   std::unordered_map<std::pair<int, int>, int, pair_hash> variables, 
+                   std::unordered_map<int, std::pair<int, int>> variables_, 
                    std::vector<std::vector<int>> clauses
 )
 {
@@ -298,7 +298,7 @@ void writeQDIMACS (std::map<int, std::vector<int>>& prefix,
         return;
     }
 
-    std::cout << "writing QDIMACS in: " << parent << std::endl;
+    std::cout << "writing QDIMACS in: " << parent << '\n';
     chdir("..");
     std::ofstream file("problem.txt");
 
@@ -312,9 +312,37 @@ void writeQDIMACS (std::map<int, std::vector<int>>& prefix,
     std::cout << "header " << header << '\n';
 
     // write prefix
-    for (const auto& [block, vars] : prefix)
+    // std::map<int, std::vector<int>> prefix_copy = prefix;
+    auto last = std::prev(prefix.end());
+    std::string line;
+
+    for (auto it = prefix.begin(); it != prefix.end(); ++it)
     {
-        
+        if (it->first % 2 == 0 || it == last)
+        {
+            // std::cout << "e" << '\n';
+            line += "e ";
+            for (int var : it->second)
+            {
+                line += std::to_string(var);
+                line += space;
+            }
+            line += "0\n";
+            file << line;
+        }
+        else
+        {
+            // std::cout << "a " << '\n';
+            line += "a ";
+            for (int var : it->second)
+            {
+                line += std::to_string(var);
+                line += space;
+            }
+            line += "0\n";
+            file << line;
+        }
+        line = "";
     }
 
     // write clauses
@@ -327,13 +355,11 @@ void writeQDIMACS (std::map<int, std::vector<int>>& prefix,
             c += std::to_string(literal);
             c += space;
         }
-        c.pop_back();
-        c += '\n';
-        std::cout << "c: " << c;
+        c += "0\n";
+        file << c;
+        // std::cout << "c: " << c;
         c = "";
     }
-
-
 
     file.close();
 

@@ -25,6 +25,5 @@ int main()
 
     writeQDIMACS(prefix, p.first, p.second, clauses);
 
-
     return 0;
 }
