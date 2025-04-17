@@ -189,9 +189,6 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
         // ALARM = 0;
     }
 
-
-
-    /* write winning strategies to "winning_moves.txt" */
     
     std::vector<std::vector<int>> winning_cubes = {};
     std::vector<int> winning_cube = {};
