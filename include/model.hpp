@@ -22,9 +22,3 @@ bool is_spaced(const std::vector<int>& combo);
 
 
 std::vector<std::vector<int>> generate_x_turns(int maxTurn);
-
-
-void writeQDIMACS (std::map<int, std::vector<int>> prefix,
-                   std::unordered_map<std::pair<int, int>, int, pair_hash> variables, 
-                   std::unordered_map<int, std::pair<int, int>> variables_, 
-                   std::vector<std::vector<int>> clauses);

@@ -5,7 +5,6 @@ int main()
 
     int N = 3, M = 3;
 
-    /* TODO: write variables to vars.txt and vars_.txt */
     std::pair<std::unordered_map<std::pair<int, int>, int, pair_hash>, 
               std::unordered_map<int, std::pair<int, int>>> p = create_variables (N, M);
     // printMapFlexible(p.first);
@@ -13,7 +12,6 @@ int main()
     std::map<int, std::vector<int>> prefix = create_prefix(p.second);
     // printMapOfVectors(prefix);
 
-    /* TODO: write winning_positions to winning_moves.txt */
     std::vector<std::vector<int>> winning_positions = define_winning_positions(N, M);
     // print2DVector(winning_positions);
 
@@ -26,8 +24,9 @@ int main()
 
     std::cout << "Num. of clauses: " << clauses.size() << "\n";
 
-    /* TODO: add writeQDIMACS to utils.hpp */
-    writeQDIMACS(prefix, p.first, p.second, clauses);
+    write_QDIMACS(prefix, p.first, p.second, clauses, "../problem.txt");
+    write_variables(p.first, "../variables.txt");
+    write_variables_(p.second, "../variables_.txt");
 
     return 0;
 }

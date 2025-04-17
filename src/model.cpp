@@ -1,6 +1,4 @@
 #include "model.hpp"
-#include <unistd.h>
-#include <fstream>
 
 std::pair<std::unordered_map<std::pair<int, int>, int, pair_hash>, 
           std::unordered_map<int, std::pair<int, int>>> create_variables (int N, int M)
@@ -209,6 +207,7 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
         }
         // std::cout << "\n";
     }
+    write_winning_moves(winning_cubes, "../winning_cubes.txt");
 
     // print2DVector(winning_cubes);
 
@@ -263,101 +262,4 @@ std::vector<std::vector<int>> create_clauses (int N, int M,
     prefix[prefix_id] = tseitin_clause;
     
     return clauses;
-}
-
-
-void writeQDIMACS (std::map<int, std::vector<int>> prefix,
-                   std::unordered_map<std::pair<int, int>, int, pair_hash> variables, 
-                   std::unordered_map<int, std::pair<int, int>> variables_, 
-                   std::vector<std::vector<int>> clauses
-)
-{
-
-    /* get cwd */
-    char cwd[PATH_MAX];
-    std::string parent;
-
-    if (getcwd(cwd, sizeof(cwd)) != nullptr) 
-    {
-        std::string path(cwd);
-        // std::cout << "Current directory: " << path << std::endl;
-
-        size_t pos = path.find_last_of('/');
-        if (pos != std::string::npos) 
-        {
-            parent = path.substr(0, pos);
-            // std::cout << "Parent directory: " << parent << std::endl;
-        }
-    } 
-    else 
-    {
-        perror("getcwd() error");
-        return;
-    }
-
-    std::cout << "writing QDIMACS in: " << parent << '\n';
-    chdir("..");
-    std::ofstream file("problem.txt");
-
-    // write header
-    std::string num_vars = std::to_string(variables.size());
-    std::string num_clauses = std::to_string(clauses.size());
-    std::string space = " ";
-    std::string header = "p cnf" + space + num_vars + space + num_clauses + '\n';
-    file << header;
-
-    std::cout << "header " << header << '\n';
-
-    // write prefix
-    // std::map<int, std::vector<int>> prefix_copy = prefix;
-    auto last = std::prev(prefix.end());
-    std::string line;
-
-    for (auto it = prefix.begin(); it != prefix.end(); ++it)
-    {
-        if (it->first % 2 == 0 || it == last)
-        {
-            // std::cout << "e" << '\n';
-            line += "e ";
-            for (int var : it->second)
-            {
-                line += std::to_string(var);
-                line += space;
-            }
-            line += "0\n";
-            file << line;
-        }
-        else
-        {
-            // std::cout << "a " << '\n';
-            line += "a ";
-            for (int var : it->second)
-            {
-                line += std::to_string(var);
-                line += space;
-            }
-            line += "0\n";
-            file << line;
-        }
-        line = "";
-    }
-
-    // write clauses
-    std::string c;
-    for (std::vector<int> clause : clauses)
-    {
-        for (int literal : clause)
-        {
-            // std::cout << literal << " ";
-            c += std::to_string(literal);
-            c += space;
-        }
-        c += "0\n";
-        file << c;
-        // std::cout << "c: " << c;
-        c = "";
-    }
-
-    file.close();
-
 }

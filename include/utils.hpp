@@ -1,8 +1,13 @@
+#ifndef UTILS_HPP
+#define UTILS_HPP
+
 #include <stdio.h>
 #include <iostream>
 #include <set>
 #include <cmath>
 #include <map>
+#include <unistd.h>
+#include <fstream>
 
 struct pair_hash 
 {
@@ -106,3 +111,26 @@ void printMapOfVectors(const std::map<int, std::vector<T>>& map)
         std::cout << '\n';
     }
 }
+
+
+void write_QDIMACS (std::map<int, std::vector<int>> prefix,
+                    std::unordered_map<std::pair<int, int>, int, pair_hash> variables, 
+                    std::unordered_map<int, std::pair<int, int>> variables_, 
+                    std::vector<std::vector<int>> clauses, 
+                    const std::string filename);
+
+
+void write_variables_ (std::unordered_map<int, std::pair<int, int>> variables_, 
+                       const std::string filename);
+
+
+
+
+void write_variables (std::unordered_map<std::pair<int, int>, int, pair_hash> variables_, 
+                      const std::string filename);
+                      
+                      
+void write_winning_moves (std::vector<std::vector<int>> winning_cubes, 
+                          const std::string filename);
+
+#endif // UTILS_HPP
