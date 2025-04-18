@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/main.cpp" "CMakeFiles/test.dir/src/main.cpp.o" "gcc" "CMakeFiles/test.dir/src/main.cpp.o.d"
+  "/Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/main.cpp" "CMakeFiles/test.dir/main.cpp.o" "gcc" "CMakeFiles/test.dir/main.cpp.o.d"
   "/Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/model.cpp" "CMakeFiles/test.dir/src/model.cpp.o" "gcc" "CMakeFiles/test.dir/src/model.cpp.o.d"
   "/Users/gabrielastancu/Documents/thesisproject/tic-tac-toe/src/utils.cpp" "CMakeFiles/test.dir/src/utils.cpp.o" "gcc" "CMakeFiles/test.dir/src/utils.cpp.o.d"
   )

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/test.dir/src/main.cpp.o"
-  "CMakeFiles/test.dir/src/main.cpp.o.d"
+  "CMakeFiles/test.dir/main.cpp.o"
+  "CMakeFiles/test.dir/main.cpp.o.d"
   "CMakeFiles/test.dir/src/model.cpp.o"
   "CMakeFiles/test.dir/src/model.cpp.o.d"
   "CMakeFiles/test.dir/src/utils.cpp.o"

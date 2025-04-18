@@ -13,4 +13,4 @@ set(INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/include)
 file(GLOB_RECURSE SRC_FILES "${SRC_DIR}/*.cpp") 
 
-add_executable(test ${SRC_FILES})
+add_executable(test ${SRC_FILES} main.cpp)
